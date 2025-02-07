@@ -1,105 +1,83 @@
-const Strings = {
-  // Metadata about the extension (this is where getInfo() is used)
-  getInfo: function () {
+const StringsExtension = {
+  // This function is used to describe the extension's metadata
+  getInfo: function() {
     return {
-      id: 'strings', // A unique identifier for your extension
-      name: 'Strings', // The name of your extension
+      id: 'strings',
+      name: 'Strings',
       blocks: [
         {
-          // Block that converts a string to uppercase
+          opcode: 'concat',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'join [STRING1] and [STRING2]',
+          arguments: {
+            STRING1: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello',
+            },
+            STRING2: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'World!',
+            },
+          },
+        },
+        {
+          opcode: 'length',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'length of [STRING]',
+          arguments: {
+            STRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello World!',
+            },
+          },
+        },
+        {
           opcode: 'toUpperCase',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'convert [TEXT] to uppercase',
+          text: 'convert [STRING] to uppercase',
           arguments: {
-            TEXT: {
+            STRING: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'hello'
-            }
-          }
+              defaultValue: 'hello',
+            },
+          },
         },
         {
-          // Block that converts a string to lowercase
           opcode: 'toLowerCase',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'convert [TEXT] to lowercase',
+          text: 'convert [STRING] to lowercase',
           arguments: {
-            TEXT: {
+            STRING: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'HELLO'
-            }
-          }
-        },
-        {
-          // Block to join two strings together
-          opcode: 'joinStrings',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'join [TEXT1] and [TEXT2]',
-          arguments: {
-            TEXT1: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'Hello'
+              defaultValue: 'HELLO',
             },
-            TEXT2: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'World'
-            }
-          }
+          },
         },
-        {
-          // Block to check if one string contains another
-          opcode: 'containsSubstring',
-          blockType: Scratch.BlockType.BOOLEAN,
-          text: '[TEXT1] contains [TEXT2]?',
-          arguments: {
-            TEXT1: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'Hello World'
-            },
-            TEXT2: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'World'
-            }
-          }
-        },
-        {
-          // Block that gets the length of a string
-          opcode: 'getStringLength',
-          blockType: Scratch.BlockType.REPORTER,
-          text: 'length of [TEXT]',
-          arguments: {
-            TEXT: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'Hello'
-            }
-          }
-        }
       ],
-      // Optional description
-      description: 'An extension for string manipulations (e.g., converting case, joining strings, etc.)'
+      menus: {},
     };
   },
 
-  // Block implementations
-  toUpperCase: function (args) {
-    return args.TEXT.toUpperCase();
+  // Concatenate two strings
+  concat: function(args) {
+    return args.STRING1 + args.STRING2;
   },
 
-  toLowerCase: function (args) {
-    return args.TEXT.toLowerCase();
+  // Get the length of a string
+  length: function(args) {
+    return args.STRING.length;
   },
 
-  joinStrings: function (args) {
-    return args.TEXT1 + args.TEXT2;
+  // Convert string to uppercase
+  toUpperCase: function(args) {
+    return args.STRING.toUpperCase();
   },
 
-  containsSubstring: function (args) {
-    return args.TEXT1.includes(args.TEXT2);
+  // Convert string to lowercase
+  toLowerCase: function(args) {
+    return args.STRING.toLowerCase();
   },
-
-  getStringLength: function (args) {
-    return args.TEXT.length;
-  }
 };
 
-// Register the extension
-Scratch.extensions.register(Strings);
+// Register the extension with Scratch
+Scratch.extensions.register(StringsExtension);
