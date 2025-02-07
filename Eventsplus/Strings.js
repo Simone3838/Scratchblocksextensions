@@ -1,108 +1,105 @@
 const Strings = {
-  // This will be the id of your extension
-  id: 'strings',
-  
-  // This is the name of the extension
-  name: 'Strings',
-  
-  // Blocks to add to the extension
-  blocks: [
-    {
-      // A block that converts a string to uppercase
-      opcode: 'toUpperCase',
-      blockType: Scratch.BlockType.REPORTER,
-      text: 'convert [TEXT] to uppercase',
-      arguments: {
-        TEXT: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'hello'
-        }
-      }
-    },
-    {
-      // A block that converts a string to lowercase
-      opcode: 'toLowerCase',
-      blockType: Scratch.BlockType.REPORTER,
-      text: 'convert [TEXT] to lowercase',
-      arguments: {
-        TEXT: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'HELLO'
-        }
-      }
-    },
-    {
-      // A block to join two strings together
-      opcode: 'joinStrings',
-      blockType: Scratch.BlockType.REPORTER,
-      text: 'join [TEXT1] and [TEXT2]',
-      arguments: {
-        TEXT1: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'Hello'
+  // Metadata about the extension (this is where getInfo() is used)
+  getInfo: function () {
+    return {
+      id: 'strings', // A unique identifier for your extension
+      name: 'Strings', // The name of your extension
+      blocks: [
+        {
+          // Block that converts a string to uppercase
+          opcode: 'toUpperCase',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'convert [TEXT] to uppercase',
+          arguments: {
+            TEXT: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'hello'
+            }
+          }
         },
-        TEXT2: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'World'
-        }
-      }
-    },
-    {
-      // A block to check if one string contains another
-      opcode: 'containsSubstring',
-      blockType: Scratch.BlockType.BOOLEAN,
-      text: '[TEXT1] contains [TEXT2]?',
-      arguments: {
-        TEXT1: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'Hello World'
+        {
+          // Block that converts a string to lowercase
+          opcode: 'toLowerCase',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'convert [TEXT] to lowercase',
+          arguments: {
+            TEXT: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'HELLO'
+            }
+          }
         },
-        TEXT2: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'World'
+        {
+          // Block to join two strings together
+          opcode: 'joinStrings',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'join [TEXT1] and [TEXT2]',
+          arguments: {
+            TEXT1: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello'
+            },
+            TEXT2: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'World'
+            }
+          }
+        },
+        {
+          // Block to check if one string contains another
+          opcode: 'containsSubstring',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: '[TEXT1] contains [TEXT2]?',
+          arguments: {
+            TEXT1: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello World'
+            },
+            TEXT2: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'World'
+            }
+          }
+        },
+        {
+          // Block that gets the length of a string
+          opcode: 'getStringLength',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'length of [TEXT]',
+          arguments: {
+            TEXT: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'Hello'
+            }
+          }
         }
-      }
-    },
-    {
-      // A block that gets the length of a string
-      opcode: 'getStringLength',
-      blockType: Scratch.BlockType.REPORTER,
-      text: 'length of [TEXT]',
-      arguments: {
-        TEXT: {
-          type: Scratch.ArgumentType.STRING,
-          defaultValue: 'Hello'
-        }
-      }
-    }
-  ],
+      ],
+      // Optional description
+      description: 'An extension for string manipulations (e.g., converting case, joining strings, etc.)'
+    };
+  },
 
-  // Implement the logic for each block
-  // Block 1: Convert to uppercase
+  // Block implementations
   toUpperCase: function (args) {
     return args.TEXT.toUpperCase();
   },
-  
-  // Block 2: Convert to lowercase
+
   toLowerCase: function (args) {
     return args.TEXT.toLowerCase();
   },
 
-  // Block 3: Join two strings
   joinStrings: function (args) {
     return args.TEXT1 + args.TEXT2;
   },
 
-  // Block 4: Check if one string contains another
   containsSubstring: function (args) {
     return args.TEXT1.includes(args.TEXT2);
   },
 
-  // Block 5: Get the length of a string
   getStringLength: function (args) {
     return args.TEXT.length;
   }
 };
 
-// This exports the extension, so Scratch can recognize and use it.
+// Register the extension
 Scratch.extensions.register(Strings);
